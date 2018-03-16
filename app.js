@@ -22,7 +22,6 @@ app.use(express.static(__dirname+"/public"));
 
 // console.log(process.env.DATABASEURL); // Created an environment variable using export <var name>=<url> , for local it is different and for heroku its different.
 mongoose.connect(process.env.DATABASEURL);
-// mongoose.connect("mongodb://shivam123425:yelpcamp@ds215709.mlab.com:15709/yelpcamp123425");
 
 // Seed the database
 // seedDB();
