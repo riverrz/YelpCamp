@@ -12,7 +12,7 @@ router.get("/", function(req,res) {
 
 // Register Form
 router.get("/register", function(req,res) {
-   res.render("register"); 
+   res.render("register", {page: "register"}); 
 });
 // Handles the register process
 router.post("/register", function(req,res) {
@@ -31,7 +31,7 @@ router.post("/register", function(req,res) {
 // LOGIN ROUTES
 // LOGIN FORM
 router.get("/login", function(req,res) {
-   res.render("login");    
+   res.render("login", {page: "login"});    
 });
 // handling login logic
 router.post("/login",passport.authenticate("local", {
