@@ -1,4 +1,5 @@
 <% include ../partials/header%>
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -17,6 +18,11 @@
                     <h4 class="pull-right">$<%= foundCamp.price%>/night</h4>
                     <h4><a><%= foundCamp.name%></a></h4>
                     <p><%= foundCamp.description%></p>
+                                                                        <!--Likes and Dislikes-->
+                    <div class="pull-right" id="counter">
+                        <button id="likes" data-id="<%= foundCamp._id %>"><%= foundCamp.likes%></button>
+                        <button id="dislikes" data-id="<%= foundCamp._id %>"><%= foundCamp.dislikes%></button>
+                    </div>
                     <p><em>Submitted by : <%= foundCamp.author.username%></em></p>
                     <% if(currentUser && foundCamp.author.id.equals(currentUser._id)) { %>       <!--  currentUser is sent through app.js by res.locals.currentUser  -->
                         <a href="/campgrounds/<%= foundCamp._id%>/edit" class="btn btn-xs btn-warning">Edit</a>
@@ -78,5 +84,5 @@
   }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsVxqOCI5l5lv0ZFBDszBrWFucpuH1Wjs&callback=initMap"></script>
-
+<script type="text/javascript" src="/js/counter.js"></script>
 <% include ../partials/footer %>

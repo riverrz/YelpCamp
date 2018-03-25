@@ -2,7 +2,9 @@
 var express = require("express");
 var router  = express.Router();
 var User    = require("../models/user");
+var Camps   = require("../models/campgrounds");
 var passport = require("passport");
+var middleware = require("../middleware/index.js");
 
 // Root route
 router.get("/", function(req,res) {
@@ -45,6 +47,24 @@ router.get("/logout", function(req,res) {
     req.logout();
     req.flash("success", "Successfully Logged Out!");
     res.redirect("/campgrounds");
+});
+
+// Handling Likes and dislikes 
+router.post("/campgrounds/:id/count/:mode" ,function(req,res) {
+    Camps.findById(req.params.id, function(err,foundCamp) {
+        if (err) {
+            console.log("Cannot update the counter");
+            res.redirect("back");
+        } else {
+            if (req.params.mode==="liked") {
+                foundCamp.likes+=1;    
+            } else {
+                foundCamp.dislikes+=1;
+            }
+            foundCamp.save();
+            res.end();
+        }
+    });
 });
 
 
