@@ -15,3 +15,39 @@
     height: 400px;
     width: 100%;
 }
+#counter a {
+    text-decoration: none;
+    color: inherit;
+}
+#counter span {
+    font-size: 1.2em;
+    margin: 5px 9px;
+}
+.fas {
+    font-size: 1.2em;
+}
+
+.fa-thumbs-up:hover {
+    
+    transform: scale(1.7);
+    
+}
+.fa-thumbs-up {
+   color: blue;
+   transition: all 0.4s linear;
+}
+.fa-selected {
+    transform: scale(1.7);
+}
+.black {
+    color: black;
+}
+
+.fa-thumbs-down {
+   color: red; 
+   transition: all 0.4s linear;
+}
+.fa-thumbs-down:hover {
+    
+    transform: scale(1.7);
+}

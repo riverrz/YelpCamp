@@ -1,7 +1,7 @@
 
 
 $("#likes").on("click", function(){
-    var likeCount = Number(document.querySelector("#likes").textContent);
+    var likeCount = Number(document.querySelector("#likeCounter").textContent);
     var id= this.dataset.id;
     $.ajax({
         type: 'POST',
@@ -11,7 +11,9 @@ $("#likes").on("click", function(){
         },
         success: function() {
             likeCount+=1;
-            document.querySelector("#likes").textContent = String(likeCount);
+            document.querySelector("#likeCounter").textContent = String(likeCount);
+            document.querySelector("#likes i").classList.add("fa-selected");
+            document.querySelector("#dislikes i").classList.remove("fa-selected");
         },
         error: function() {
             alert("Failed");
@@ -21,14 +23,16 @@ $("#likes").on("click", function(){
 });
 
 $("#dislikes").on("click", function(){
-   var dislikeCount = Number(document.querySelector("#dislikes").textContent);
+   var dislikeCount = Number(document.querySelector("#dislikeCounter").textContent);
     var id= this.dataset.id;
     $.ajax({
         type: 'POST',
         url: "/campgrounds/"+id+"/count/disliked",
         success: function() {
             dislikeCount+=1;
-            document.querySelector("#dislikes").textContent = String(dislikeCount);
+            document.querySelector("#dislikeCounter").textContent = String(dislikeCount);
+            document.querySelector("#dislikes i").classList.add("fa-selected");
+            document.querySelector("#likes i").classList.remove("fa-selected");
         },
         error: function() {
             alert("Failed");

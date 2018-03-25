@@ -20,8 +20,15 @@
                     <p><%= foundCamp.description%></p>
                                                                         <!--Likes and Dislikes-->
                     <div class="pull-right" id="counter">
-                        <button id="likes" data-id="<%= foundCamp._id %>"><%= foundCamp.likes%></button>
-                        <button id="dislikes" data-id="<%= foundCamp._id %>"><%= foundCamp.dislikes%></button>
+                        <a id="likes" data-id="<%= foundCamp._id %>"> 
+                            <i class="fas fa-thumbs-up"></i> 
+                            
+                        </a>
+                        <span id="likeCounter"><%= foundCamp.likes%></span>
+                        <a id="dislikes" data-id="<%= foundCamp._id %>">
+                             <i class="fas fa-thumbs-down"></i>
+                         </a>
+                         <span id="dislikeCounter"><%= foundCamp.dislikes%></span>
                     </div>
                     <p><em>Submitted by : <%= foundCamp.author.username%></em></p>
                     <% if(currentUser && foundCamp.author.id.equals(currentUser._id)) { %>       <!--  currentUser is sent through app.js by res.locals.currentUser  -->
