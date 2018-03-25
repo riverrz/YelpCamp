@@ -121,10 +121,6 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
     var lng = data[0].longitude;
     var location = data[0].formattedAddress;
     var price = req.body.price;
-    // var newData = req.body.update;
-    // newData['location']=location;
-    // newData['lat']=lat;
-    // newData['lng']=lng;
     
     var newData = {name: req.body.name, image: req.body.image, price:price,description: req.body.description, location: location, lat: lat, lng: lng};
     Camps.findByIdAndUpdate(req.params.id, newData, function(err, campground){
@@ -150,7 +146,23 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req,res) {
    }); 
 });
 
-
+// Handling Likes and dislikes 
+router.post("/:id/count/:mode" ,function(req,res) {
+    Camps.findById(req.params.id, function(err,foundCamp) {
+        if (err) {
+            console.log("Cannot update the counter");
+            res.redirect("back");
+        } else {
+            if (req.params.mode==="liked") {
+                foundCamp.likes+=1;    
+            } else {
+                foundCamp.dislikes+=1;
+            }
+            foundCamp.save();
+            res.end();
+        }
+    });
+});
 
 
 

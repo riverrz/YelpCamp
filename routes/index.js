@@ -49,23 +49,7 @@ router.get("/logout", function(req,res) {
     res.redirect("/campgrounds");
 });
 
-// Handling Likes and dislikes 
-router.post("/campgrounds/:id/count/:mode" ,function(req,res) {
-    Camps.findById(req.params.id, function(err,foundCamp) {
-        if (err) {
-            console.log("Cannot update the counter");
-            res.redirect("back");
-        } else {
-            if (req.params.mode==="liked") {
-                foundCamp.likes+=1;    
-            } else {
-                foundCamp.dislikes+=1;
-            }
-            foundCamp.save();
-            res.end();
-        }
-    });
-});
+
 
 
 module.exports = router;
