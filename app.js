@@ -3,13 +3,13 @@ var express     = require("express"),
     bodyParser  = require("body-parser"),
     mongoose    = require("mongoose"),
     flash       = require("connect-flash"),
-    Camps       = require("./models/campgrounds"),
+    
     seedDB      = require("./seed"),
     methodOverride = require("method-override"),
     passport    = require("passport"),
     LocalStrategy   = require("passport-local"),
-    User        = require(__dirname+"/models/user"),
-    Comment     = require("./models/comment");
+    User        = require(__dirname+"/models/user");
+
    // Requiring Routes
 var commentRoutes       = require("./routes/comments"),
     campgroundRoutes    = require("./routes/campgrounds"),
@@ -22,6 +22,7 @@ app.use(express.static(__dirname+"/public"));
 
 // console.log(process.env.DATABASEURL); // Created an environment variable using export <var name>=<url> , for local it is different and for heroku its different.
 mongoose.connect(process.env.DATABASEURL);
+
 // mongoose.connect("mongodb://localhost/yelp_camp");
 
 // Seed the database

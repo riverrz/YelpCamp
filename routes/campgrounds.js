@@ -2,6 +2,7 @@
 var express = require("express");
 var router  = express.Router();
 var Camps   = require("../models/campgrounds");
+var Users   = require("../models/user");
 var middleware = require("../middleware/index.js"); // Contains all the middleware needed
 var NodeGeocoder = require('node-geocoder');
  
@@ -147,10 +148,10 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req,res) {
 });
 
 // Handling Likes and dislikes 
-router.post("/:id/count/:mode" ,function(req,res) {
+router.post("/:id/count/:userId/:mode" , function(req,res) {
     Camps.findById(req.params.id, function(err,foundCamp) {
         if (err) {
-            console.log("Cannot update the counter");
+            console.log(err);
             res.redirect("back");
         } else {
             if (req.params.mode==="liked") {
@@ -158,7 +159,19 @@ router.post("/:id/count/:mode" ,function(req,res) {
             } else {
                 foundCamp.dislikes+=1;
             }
-            foundCamp.save();
+            Users.findById(req.params.userId, function(err,foundUser){
+                if (err) {
+                    console.log(err);
+                }else {
+                    console.log(foundCamp._id);
+                    foundUser.postsReacted.push(foundCamp._id);
+                    console.log(foundUser);
+                    foundUser.save();
+                    foundCamp.save();
+                }
+            })
+            
+            
             res.end();
         }
     });

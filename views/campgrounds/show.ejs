@@ -18,14 +18,16 @@
                     <h4 class="pull-right">$<%= foundCamp.price%>/night</h4>
                     <h4><a><%= foundCamp.name%></a></h4>
                     <p><%= foundCamp.description%></p>
+                    
                                                                         <!--Likes and Dislikes-->
                     <div class="pull-right" id="counter">
-                        <a id="likes" data-id="<%= foundCamp._id %>"> 
+                        <% var ids= String(foundCamp._id)+" "+String(currentUser._id) %>
+                        <a id="likes" data-id="<%= ids %>" > 
                             <i class="fas fa-thumbs-up"></i> 
-                            
                         </a>
                         <span id="likeCounter"><%= foundCamp.likes%></span>
-                        <a id="dislikes" data-id="<%= foundCamp._id %>">
+
+                        <a id="dislikes" data-id="<%= ids %>" >
                              <i class="fas fa-thumbs-down"></i>
                          </a>
                          <span id="dislikeCounter"><%= foundCamp.dislikes%></span>

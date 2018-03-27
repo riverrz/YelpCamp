@@ -1,11 +1,13 @@
 
-
 $("#likes").on("click", function(){
     var likeCount = Number(document.querySelector("#likeCounter").textContent);
-    var id= this.dataset.id;
+    var ids= this.dataset.id.split(" ");
+    var id=ids[0];
+    var userId=ids[1];
+    
     $.ajax({
         type: 'POST',
-        url: "/campgrounds/"+id+"/count/liked",
+        url: "/campgrounds/"+id+"/count/"+userId+"/liked",
         data: {
             count:1
         },
@@ -24,10 +26,13 @@ $("#likes").on("click", function(){
 
 $("#dislikes").on("click", function(){
    var dislikeCount = Number(document.querySelector("#dislikeCounter").textContent);
-    var id= this.dataset.id;
+    var ids= this.dataset.id.split(" ");
+    var id=ids[0];
+    var userId=ids[1];
+    console.log(id,userId)
     $.ajax({
         type: 'POST',
-        url: "/campgrounds/"+id+"/count/disliked",
+        url: "/campgrounds/"+id+"/count/"+userId+"/disliked",
         success: function() {
             dislikeCount+=1;
             document.querySelector("#dislikeCounter").textContent = String(dislikeCount);
