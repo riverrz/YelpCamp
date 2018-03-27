@@ -33,19 +33,17 @@
     
 }
 .fa-thumbs-up {
-   color: blue;
-   transition: all 0.4s linear;
+   color: #3b5998;
+   transition: all 0.2s ease-in;
 }
 .fa-selected {
     transform: scale(1.7);
 }
-.black {
-    color: black;
-}
+
 
 .fa-thumbs-down {
-   color: red; 
-   transition: all 0.4s linear;
+   color: #cd2029; 
+   transition: all 0.2s ease-in;
 }
 .fa-thumbs-down:hover {
     
