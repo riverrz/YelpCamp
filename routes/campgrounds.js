@@ -164,8 +164,8 @@ router.post("/:id/count/:userId/:mode" , function(req,res) {
                     console.log(err);
                 }else {
                     
-                    foundUser.postsReacted.push(foundCamp._id);
-                    
+                    foundUser.postsReacted.push({id:foundCamp._id, reaction: req.params.mode});
+                    console.log(foundUser);
                     foundUser.save();
                     foundCamp.save();
                 }
