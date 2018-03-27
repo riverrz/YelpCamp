@@ -21,7 +21,8 @@
                     
                                                                         <!--Likes and Dislikes-->
                     <div class="pull-right" id="counter">
-                        <% var ids= String(foundCamp._id)+" "+String(currentUser._id) %>
+                        <% var ids= String(foundCamp._id) %>
+                        <% if(currentUser) {ids=ids+" "+String(currentUser._id)} %>
                         <a id="likes" data-id="<%= ids %>" > 
                             <i class="fas fa-thumbs-up"></i> 
                         </a>
