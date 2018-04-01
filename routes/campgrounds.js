@@ -147,34 +147,59 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req,res) {
    }); 
 });
 
+
 // Handling Likes and dislikes 
 router.post("/:id/count/:userId/:mode" , function(req,res) {
-    Camps.findById(req.params.id, function(err,foundCamp) {
-        if (err) {
+
+    Camps.findById(req.params.id, function(err,foundCamp){
+        if(err) {
             console.log(err);
+            req.flash("error", "Couldn't do this event, some error occured");
             res.redirect("back");
-        } else {
-            if (req.params.mode==="liked") {
-                foundCamp.likes+=1;    
-            } else {
-                foundCamp.dislikes+=1;
-            }
-            Users.findById(req.params.userId, function(err,foundUser){
-                if (err) {
+        } else{
+            Users.findById(req.params.userId, function(err, foundUser){
+                if(err) {
                     console.log(err);
                 }else {
-                    
-                    foundUser.postsReacted.push({id:foundCamp._id, reaction: req.params.mode});
-                    console.log(foundUser);
-                    foundUser.save();
-                    foundCamp.save();
+                    var index = foundUser.postsReacted.findIndex(function(post){
+                        return foundCamp._id.equals(post.id);
+                    });
+                    if (index===-1) {
+                        foundUser.postsReacted.push({id: req.params.id, reaction: String(req.params.mode)});
+                        foundCamp[req.params.mode]+=1
+                    } else {
+                        if(foundUser.postsReacted[index].reaction === req.params.mode) {
+                            foundUser.postsReacted.splice(index,1);
+                            foundCamp[req.params.mode]-=1;
+                            
+                        } else {
+                            var opposite={"likes":"dislikes", "dislikes":"likes"};
+                            var updatedPostsReacted = JSON.parse(JSON.stringify(foundUser.postsReacted));
+                            updatedPostsReacted[index].reaction = String(req.params.mode);
+                            foundUser.set({postsReacted: updatedPostsReacted});
+                            foundCamp[req.params.mode]+=1;
+                            foundCamp[opposite[req.params.mode]]-=1;
+                        }
+                    }
+                    foundUser.save(function(err){
+                        if(err){
+                            console.log(err)
+                        }else {
+                            foundCamp.save(function(err){
+                                if(err){
+                                    console.log(err);
+                                }else {
+                                    res.send(JSON.stringify({likes: foundCamp.likes, dislikes: foundCamp.dislikes}));
+                                }
+                            });
+                        }
+                    })
                 }
             })
             
             
-            res.end();
         }
-    });
+    })
 });
 
 

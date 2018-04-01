@@ -1,6 +1,7 @@
     var mongoose = require("mongoose");
     var Campground = require("./models/campgrounds");
     var Comment   = require("./models/comment");
+    var Users   = require("./models/user");
      
     // var data = [
     //     {
@@ -74,6 +75,16 @@
                 
             }
         });
+        Users.find({}, function(err,foundUser){
+            if(err){
+                console.log(err);
+            }else {
+                foundUser.forEach(function(user){
+                    user.postsReacted=[];
+                    user.save();
+                })
+            }
+        })
     }
      
     module.exports = seedDB;
