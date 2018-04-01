@@ -26,7 +26,7 @@ mongoose.connect(process.env.DATABASEURL);
 // mongoose.connect("mongodb://localhost/yelp_camp");
 
 // Seed the database
-seedDB();
+// seedDB();
 
 app.use(methodOverride("_method")); // use methodOverride and look for _method in query string
 app.use(flash());
