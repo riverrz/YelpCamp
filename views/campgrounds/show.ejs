@@ -1,4 +1,13 @@
 <% include ../partials/header%>
+<% var redclass=''%>
+<% var blueclass=''%>
+<% if (currentUser) { %>
+    <% var index = currentUser.postsReacted.findIndex(function(post){ return String(post.id)===String(foundCamp._id) })  %>
+    <% if (index!==-1) { %>
+        <% if (currentUser.postsReacted[index].reaction==="likes") { blueclass = "fa-thumbs-up-selected"} else if(currentUser.postsReacted[index].reaction==="dislikes") {redclass = "fa-thumbs-down-selected"} %>
+    <% } %>
+<% }%>
+
 
 <div class="container">
     <div class="row">
@@ -24,14 +33,14 @@
                         <% var ids= String(foundCamp._id) %>
                         <% if(currentUser) {ids=ids+" "+String(currentUser._id)} %>
                         <a id="likes" data-id="<%= ids %>" > 
-                            <i class="fas fa-thumbs-up"></i> 
+                            <i class="<%="fas fa-thumbs-up "+blueclass%>"></i> 
                         </a>
-                        <span id="likeCounter"><%= foundCamp.likes%></span>
+                        <div class="well"><span id="likeCounter"><%= foundCamp.likes%></span></div>
 
                         <a id="dislikes" data-id="<%= ids %>" >
-                             <i class="fas fa-thumbs-down"></i>
+                             <i class="<%="fas fa-thumbs-down "+redclass%>"></i>
                          </a>
-                         <span id="dislikeCounter"><%= foundCamp.dislikes%></span>
+                         <div class="well"><span id="dislikeCounter"><%= foundCamp.dislikes%></span></div>
                     </div>
                     <p><em>Submitted by : <%= foundCamp.author.username%></em></p>
                     <% if(currentUser && foundCamp.author.id.equals(currentUser._id)) { %>       <!--  currentUser is sent through app.js by res.locals.currentUser  -->

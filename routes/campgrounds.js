@@ -158,6 +158,7 @@ router.post("/:id/count/:userId/:mode" , function(req,res) {
             res.redirect("back");
         } else{
             Users.findById(req.params.userId, function(err, foundUser){
+                var result = {likes: 0 , dislikes: 0 , extra:0};
                 if(err) {
                     console.log(err);
                 }else {
@@ -171,6 +172,7 @@ router.post("/:id/count/:userId/:mode" , function(req,res) {
                         if(foundUser.postsReacted[index].reaction === req.params.mode) {
                             foundUser.postsReacted.splice(index,1);
                             foundCamp[req.params.mode]-=1;
+                            result.extra=1;
                             
                         } else {
                             var opposite={"likes":"dislikes", "dislikes":"likes"};
@@ -189,7 +191,9 @@ router.post("/:id/count/:userId/:mode" , function(req,res) {
                                 if(err){
                                     console.log(err);
                                 }else {
-                                    res.send(JSON.stringify({likes: foundCamp.likes, dislikes: foundCamp.dislikes}));
+                                    result.likes= foundCamp.likes;
+                                    result.dislikes= foundCamp.dislikes;
+                                    res.send(JSON.stringify(result));
                                 }
                             });
                         }

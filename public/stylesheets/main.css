@@ -24,28 +24,25 @@
     margin: 5px 9px;
 }
 .fas {
+    color: gray;
     font-size: 1.2em;
 }
 
-.fa-thumbs-up:hover {
-    
-    transform: scale(1.7);
-    
-}
-.fa-thumbs-up {
-   color: #3b5998;
-   transition: all 0.2s ease-in;
-}
-.fa-selected {
-    transform: scale(1.7);
-}
 
 
-.fa-thumbs-down {
-   color: #cd2029; 
-   transition: all 0.2s ease-in;
-}
-.fa-thumbs-down:hover {
+.fa-thumbs-up-selected {
+    /*color: #3b5998;*/
+    color: blue;
     
-    transform: scale(1.7);
+}
+.fa-thumbs-down-selected {
+    /*color: #cd2029; */
+    color: red;
+}
+
+#counter .well {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 2px 5px;
+    margin: auto 5px;
 }
