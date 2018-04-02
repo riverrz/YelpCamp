@@ -6,6 +6,14 @@
                 <h1>Welcome to the YelpCamp!</h1> 
                 <p>View our hand-picked campgrounds from all over the world</p>
                 <p><a class="btn btn-primary btn-lg" href="/campgrounds/new">Add a new Camping Ground</a></p>
+                
+                <!--Adding method explicitly will put this req.query instead of req.body-->
+                <form action="/campgrounds" class="form-inline" method="GET">  
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search Campgrounds">
+                        <input class="btn btn-primary" type="submit" value="Search">
+                    </div>
+                </form>
             </div>
         </header>
         <div class="row text-center" style="display:flex; flex-wrap:wrap;">

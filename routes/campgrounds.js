@@ -19,15 +19,27 @@ var geocoder = NodeGeocoder(options);
 
 router.get("/", function(req,res) {
     // req.user , passport has created req.user this which contains the info abput the current user , if user is nnot logged in then its undefined else it contains the name.
-    Camps.find({}, function(err, camps) {
-        if (err) {
-            console.log("An Error occured while printing");
-        }
-        else {
-            res.render("campgrounds/campgrounds", {camps:camps, page: "campgrounds"});  // campgrounds.ejs inside campgrounds folder
-        }
-    });
-    
+    // console.log(req.query);
+    if (req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        Camps.find({name: regex}, function(err, camps) {
+            if (err) {
+                console.log("An Error occured while printing");
+            }
+            else {
+                res.render("campgrounds/campgrounds", {camps:camps, page: "campgrounds"});  // campgrounds.ejs inside campgrounds folder
+            }
+        });
+    }else {
+        Camps.find({}, function(err, camps) {
+            if (err) {
+                console.log("An Error occured while printing");
+            }
+            else {
+                res.render("campgrounds/campgrounds", {camps:camps, page: "campgrounds"});  // campgrounds.ejs inside campgrounds folder
+            }
+        });
+    }
 });
 
 //CREATE - add new campground to DB
@@ -206,6 +218,9 @@ router.post("/:id/count/:userId/:mode" , function(req,res) {
     })
 });
 
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 
 module.exports = router;
