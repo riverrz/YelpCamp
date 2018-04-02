@@ -62,26 +62,49 @@
     //     //add a few comments
     // }
     
+    // function seedDB() {
+    //     Campground.find({}, function(err,foundCamps) {
+    //         if (err) {
+    //             console.log(err);
+    //         } else {
+    //             foundCamps.forEach(function(camp){
+    //                 camp.likes=0;
+    //                 camp.dislikes=0;
+    //                 camp.save();
+    //             });
+                
+    //         }
+    //     });
+    //     Users.find({}, function(err,foundUser){
+    //         if(err){
+    //             console.log(err);
+    //         }else {
+    //             foundUser.forEach(function(user){
+    //                 user.postsReacted=[];
+    //                 user.save();
+    //             })
+    //         }
+    //     })
+    // }
+    
     function seedDB() {
-        Campground.find({}, function(err,foundCamps) {
+        Comment.find({},function(err,comments){
             if (err) {
                 console.log(err);
-            } else {
-                foundCamps.forEach(function(camp){
-                    camp.likes=0;
-                    camp.dislikes=0;
-                    camp.save();
-                });
-                
-            }
-        });
-        Users.find({}, function(err,foundUser){
-            if(err){
-                console.log(err);
             }else {
-                foundUser.forEach(function(user){
-                    user.postsReacted=[];
-                    user.save();
+                comments.forEach(function(comment){
+                    comment.createdAt = new Date("2018-04-02T18:52:41.142Z");
+                    comment.save();
+                })
+                Campground.find({}, function(err,camps){
+                    if(err) {
+                        console.log(err);
+                    }else {
+                        camps.forEach(function(camp){
+                            camp.createdAt = new Date("2018-04-02T18:52:41.142Z");
+                            camp.save();
+                        })
+                    }
                 })
             }
         })

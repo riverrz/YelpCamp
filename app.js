@@ -19,6 +19,7 @@ var commentRoutes       = require("./routes/comments"),
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname+"/public"));
+app.locals.moment = require('moment');
 
 // console.log(process.env.DATABASEURL); // Created an environment variable using export <var name>=<url> , for local it is different and for heroku its different.
 mongoose.connect(process.env.DATABASEURL);
@@ -26,7 +27,7 @@ mongoose.connect(process.env.DATABASEURL);
 // mongoose.connect("mongodb://localhost/yelp_camp");
 
 // Seed the database
-// seedDB();
+seedDB();
 
 app.use(methodOverride("_method")); // use methodOverride and look for _method in query string
 app.use(flash());
