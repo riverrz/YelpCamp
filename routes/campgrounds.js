@@ -27,7 +27,12 @@ router.get("/", function(req,res) {
                 console.log("An Error occured while printing");
             }
             else {
-                res.render("campgrounds/campgrounds", {camps:camps, page: "campgrounds"});  // campgrounds.ejs inside campgrounds folder
+                if(camps.length<1) {
+                    req.flash("error", "No matching campground's found!");
+                    res.redirect("back");
+                } else {
+                    res.render("campgrounds/campgrounds", {camps:camps, page: "campgrounds"});  // campgrounds.ejs inside campgrounds folder    
+                }
             }
         });
     }else {
@@ -36,7 +41,7 @@ router.get("/", function(req,res) {
                 console.log("An Error occured while printing");
             }
             else {
-                res.render("campgrounds/campgrounds", {camps:camps, page: "campgrounds"});  // campgrounds.ejs inside campgrounds folder
+                res.render("campgrounds/campgrounds", {camps:camps, page: "campgrounds"});  // campgrounds.ejs inside campgrounds folder    
             }
         });
     }
