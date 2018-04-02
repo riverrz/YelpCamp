@@ -166,7 +166,10 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req,res) {
 
 
 // Handling Likes and dislikes 
-router.post("/:id/count/:userId/:mode" , function(req,res) {
+router.post("/:id/count/:mode" , function(req,res) {
+    if(!req.user) {
+        res.send("0");
+    } else {
 
     Camps.findById(req.params.id, function(err,foundCamp){
         if(err) {
@@ -174,7 +177,7 @@ router.post("/:id/count/:userId/:mode" , function(req,res) {
             req.flash("error", "Couldn't do this event, some error occured");
             res.redirect("back");
         } else{
-            Users.findById(req.params.userId, function(err, foundUser){
+            Users.findById(req.user._id, function(err, foundUser){
                 var result = {likes: 0 , dislikes: 0 , extra:0};
                 if(err) {
                     console.log(err);
@@ -221,6 +224,7 @@ router.post("/:id/count/:userId/:mode" , function(req,res) {
             
         }
     })
+    }
 });
 
 function escapeRegex(text) {

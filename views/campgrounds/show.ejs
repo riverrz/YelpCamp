@@ -30,14 +30,14 @@
                     
                                                                         <!--Likes and Dislikes-->
                     <div class="pull-right" id="counter">
-                        <% var ids= String(foundCamp._id) %>
-                        <% if(currentUser) {ids=ids+" "+String(currentUser._id)} %>
-                        <a id="likes" data-id="<%= ids %>" > 
+                        
+                        
+                        <a id="likes" data-id="<%= String(foundCamp._id) %>" > 
                             <i class="<%="fas fa-thumbs-up "+blueclass%>"></i> 
                         </a>
                         <div class="well"><span id="likeCounter"><%= foundCamp.likes%></span></div>
 
-                        <a id="dislikes" data-id="<%= ids %>" >
+                        <a id="dislikes" data-id="<%= String(foundCamp._id) %>" >
                              <i class="<%="fas fa-thumbs-down "+redclass%>"></i>
                          </a>
                          <div class="well"><span id="dislikeCounter"><%= foundCamp.dislikes%></span></div>

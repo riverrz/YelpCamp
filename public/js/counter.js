@@ -2,14 +2,15 @@
     $("#likes").on("click", function(){
         var likeCount = Number(document.querySelector("#likeCounter").textContent);
         var dislikeCount = Number(document.querySelector("#dislikeCounter").textContent);
-        var ids= this.dataset.id.split(" ");
-        if (ids.length>1) {
-            var id=ids[0];
-            var userId=ids[1];
+        var id= this.dataset.id;
             $.ajax({
                 type: 'POST',
-                url: "/campgrounds/"+id+"/count/"+userId+"/likes"
+                url: "/campgrounds/"+id+"/count/likes"
             }).done(function(count){
+                if (count==='0') {
+                    window.location.href = "/login";
+                    return;
+                }
                 count=JSON.parse(count);
                 likeCount=count.likes;
                 dislikeCount=count.dislikes
@@ -23,24 +24,21 @@
                 }
                 
             });
-        } else {
-            alert("You need to be logged in first!");
-        }
         
     });
     
     $("#dislikes").on("click", function(){
         var likeCount = Number(document.querySelector("#likeCounter").textContent);
         var dislikeCount = Number(document.querySelector("#dislikeCounter").textContent);
-        var ids= this.dataset.id.split(" ");
-        if (ids.length>1) {
-            var id=ids[0];
-            var userId=ids[1];
-            
+        var id= this.dataset.id;
             $.ajax({
                 type: 'POST',
-                url: "/campgrounds/"+id+"/count/"+userId+"/dislikes"
+                url: "/campgrounds/"+id+"/count/dislikes"
             }).done(function(count){
+                if (count==='0') {
+                    window.location.href = "/login";
+                    return;
+                }
                 count=JSON.parse(count);
                 likeCount=count.likes;
                 dislikeCount=count.dislikes
@@ -54,7 +52,4 @@
                 }
                 
             });
-        } else {
-            alert("You need to be logged in first!");
-        }
     });
