@@ -6,6 +6,6 @@ A registered user can upload a campground, comment on an existing campground, li
 
 A non registered user can only view a campground.
 
-###
-
 Created under Udemy course Web Development Bootcamp by- Colt Steele
+
+Live at - https://warm-castle-43589.herokuapp.com/campgrounds
