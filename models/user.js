@@ -7,10 +7,7 @@ var userSchema = new mongoose.Schema({
        required: true,
        trim: true
    },
-    password: {
-        type: String,
-        required: true
-    },
+    password: String,
    postsReacted: []
 });
 
