@@ -1,6 +1,6 @@
 YelpCamp
 
-Live at - https://warm-castle-43589.herokuapp.com/campgrounds
+Live at - https://warm-castle-43589.herokuapp.com/
 
 A camping site allowing registered user to upload their very own campgrounds.
 
